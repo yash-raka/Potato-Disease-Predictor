@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import ImageUploader from '@/components/ImageUploader';
 import ImagePreview from '@/components/ImagePreview';
@@ -7,7 +9,7 @@ import PredictionResult from '@/components/PredictionResult';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { predictDisease, PotatoDisease } from '@/services/predictionService';
-import { ArrowRight, FileQuestion, RefreshCw, Leaf } from 'lucide-react';
+import { ArrowRight, FileQuestion, RefreshCw, Leaf, Database } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Index = () => {
@@ -65,6 +67,15 @@ const Index = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">
               Upload a photo of a potato plant leaf and our AI will analyze it to detect diseases and provide treatment recommendations.
             </p>
+            
+            <div className="mt-4">
+              <Link to="/dataset">
+                <Button variant="outline" className="gap-2">
+                  <Database className="h-4 w-4" />
+                  Manage Training Dataset
+                </Button>
+              </Link>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
