@@ -8,7 +8,7 @@ import PredictionResult from '@/components/PredictionResult';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { predictDisease, PotatoDisease } from '@/services/predictionService';
-import { ArrowRight, FileQuestion, RefreshCw } from 'lucide-react';
+import { ArrowRight, FileQuestion, RefreshCw, Leaf } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Index = () => {
