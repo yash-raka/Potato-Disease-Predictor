@@ -101,10 +101,20 @@ const DatasetManager = () => {
     input.multiple = true;
     input.accept = 'image/*';
     input.onchange = (e) => {
-      const event = e as React.ChangeEvent<HTMLInputElement>;
+      // Fix #1: Properly cast the Event to unknown first, then to React.ChangeEvent<HTMLInputElement>
+      if (!e) return;
+      const event = e as unknown as React.ChangeEvent<HTMLInputElement>;
       handleFileUpload(event, selectedCategory);
     };
     input.click();
+  };
+
+  // Function to safely handle tab selection with the correct types
+  const handleTabSelection = (value: string) => {
+    // Ensure value is a valid category before setting it
+    if (value === 'early_blight' || value === 'late_blight' || value === 'healthy') {
+      setSelectedCategory(value);
+    }
   };
 
   return (
@@ -274,7 +284,8 @@ const DatasetManager = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Tabs defaultValue="early_blight" onValueChange={setSelectedCategory}>
+              {/* Fix #2: Use the custom handleTabSelection function to handle value changes properly */}
+              <Tabs defaultValue="early_blight" onValueChange={handleTabSelection}>
                 <TabsList className="mb-4">
                   <TabsTrigger value="early_blight">Early Blight ({images.early_blight.length})</TabsTrigger>
                   <TabsTrigger value="late_blight">Late Blight ({images.late_blight.length})</TabsTrigger>
