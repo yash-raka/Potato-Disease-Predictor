@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
+import { DatasetImage } from '@/types/dataset';
 
 interface ImageGridProps {
   images: DatasetImage[];

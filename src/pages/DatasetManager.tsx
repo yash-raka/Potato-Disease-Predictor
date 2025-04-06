@@ -7,10 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { ImagePlus, FolderPlus, Database, ArrowLeft, Trash2 } from 'lucide-react';
+import { ImagePlus, FolderPlus, Database, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import ImageGrid from '@/components/ImageGrid';
 import { uploadDatasetImage, getDatasetImages, deleteDatasetImage } from '@/services/datasetService';
+import { DatasetImage } from '@/types/dataset';
 
 const DatasetManager = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const DatasetManager = () => {
     'late_blight': [],
     'healthy': []
   });
-  const [selectedCategory, setSelectedCategory] = useState('early_blight');
+  const [selectedCategory, setSelectedCategory] = useState<'early_blight' | 'late_blight' | 'healthy'>('early_blight');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [stats, setStats] = useState({
@@ -53,7 +54,7 @@ const DatasetManager = () => {
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, category: string) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, category: 'early_blight' | 'late_blight' | 'healthy') => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -82,7 +83,7 @@ const DatasetManager = () => {
     }
   };
 
-  const handleDeleteImage = async (imageId: string, category: string) => {
+  const handleDeleteImage = async (imageId: string, category: 'early_blight' | 'late_blight' | 'healthy') => {
     try {
       await deleteDatasetImage(imageId, category);
       toast.success("Image deleted successfully");
@@ -99,7 +100,10 @@ const DatasetManager = () => {
     input.type = 'file';
     input.multiple = true;
     input.accept = 'image/*';
-    input.onchange = (e) => handleFileUpload(e as React.ChangeEvent<HTMLInputElement>, selectedCategory);
+    input.onchange = (e) => {
+      const event = e as React.ChangeEvent<HTMLInputElement>;
+      handleFileUpload(event, selectedCategory);
+    };
     input.click();
   };
 

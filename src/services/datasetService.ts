@@ -1,12 +1,5 @@
 
-// Dataset image type definition
-export interface DatasetImage {
-  id: string;
-  filename: string;
-  url: string;
-  category: 'early_blight' | 'late_blight' | 'healthy';
-  dateAdded: string;
-}
+import { DatasetImage } from '@/types/dataset';
 
 // In-memory storage for dataset images since we don't have a backend yet
 const datasetStorage: {[key: string]: DatasetImage[]} = {
