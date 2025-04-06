@@ -2,8 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/15b6e36a-8616-4d2d-bab8-37addd007e64
-
+**URL**: https://preview--potato-leaf-guardian.lovable.app/
 ## How can I edit this code?
 
 There are several ways of editing your application.
